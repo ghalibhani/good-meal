@@ -8,16 +8,31 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchCategories } from "../redux/categoriesSlice";
 import { useSelector } from "react-redux";
+import { fetchMealsByCategory } from "../redux/mealsByCatSlice";
+import { useState } from "react";
 
 export default function HomePage() {
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.categories);
+  const { categories } = useSelector((state) => state.categories.categories);
+  const { meals, isLoading } = useSelector((state) => ({
+    meals: state.mealsByCat.meals.meals,
+    isLoading: state.mealsByCat.isLoading,
+  }));
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
-  // console.log("----------- data homepage", categories);
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+  };
+
+  useEffect(() => {
+    if (selectedCategory) {
+      dispatch(fetchMealsByCategory(selectedCategory));
+    }
+  }, [selectedCategory, dispatch]);
 
   return (
     <>
@@ -82,11 +97,31 @@ export default function HomePage() {
           <h1 className='text-5xl pb-10 text-center font-bold text-amber-900'>
             Choose what suits you
           </h1>
-          <div>
-            <button className='btn btn-accent'>Breakfast</button>
-            <button className='btn btn-ghost'>Lunch</button>
-            <button className='btn btn-ghost'>Dinner</button>
-            <button className='btn btn-ghost'>Dessert</button>
+          <div className='grid grid-cols-9 items-center mb-7 grid-rows-2 gap-3 w-[1100px] mx-auto'>
+            {categories?.map((category, index) => (
+              <button
+                key={category.idCategory}
+                className={`btn btn-accent w-28 ${
+                  index > 8 ? `col-start-${(index % 9) + 3}` : ""
+                }`}
+                onClick={() => handleCategoryClick(category.strCategory)}
+              >
+                {category.strCategory}
+              </button>
+            ))}
+          </div>
+          <div className='flex flex-wrap gap-6 px-32'>
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : (
+              meals?.map((meal) => (
+                <CardHero
+                  key={meal.idMeal}
+                  image={meal.strMealThumb}
+                  title={meal.strMeal}
+                />
+              ))
+            )}
           </div>
         </div>
       </section>
