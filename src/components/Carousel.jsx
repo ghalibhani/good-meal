@@ -1,22 +1,30 @@
 import React, { useState } from "react";
-import carouselImage from "../assets/hero-burger.jpg";
+import carouselImage1 from "../assets/blini-pancakes.jpg";
+import carouselImage2 from "../assets/fish-soup.jpg";
+import carouselImage3 from "../assets/salad.jpg";
+import carouselImage4 from "../assets/salmon.jpg";
 
 const Carousel = () => {
   const slides = [
     {
       id: 1,
-      image: carouselImage,
-      caption: "Slide 1 Caption",
+      image: carouselImage1,
+      caption: "Blini Pancakes",
     },
     {
       id: 2,
-      image: carouselImage,
-      caption: "Slide 2 Caption",
+      image: carouselImage2,
+      caption: "Fish Soup",
     },
     {
       id: 3,
-      image: carouselImage,
-      caption: "Slide 3 Caption",
+      image: carouselImage3,
+      caption: "Caeasar Salad",
+    },
+    {
+      id: 4,
+      image: carouselImage4,
+      caption: "Salmon Prawn Risotto",
     },
   ];
 

@@ -4,11 +4,25 @@ import CardHero from "../components/CardHero";
 import cardImage1 from "../assets/cardImage1.jpg";
 import cardImage2 from "../assets/cardImage2.jpg";
 import Carousell from "../components/Carousel";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchCategories } from "../redux/categoriesSlice";
+import { useSelector } from "react-redux";
 
 export default function HomePage() {
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.categories);
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
+  // console.log("----------- data homepage", categories);
+
   return (
     <>
       <section className='flex justify-between items-center px-48 h-screen'>
+        {/* Hero Text */}
         <div>
           <div>
             <h1 className='text-8xl mb-16 font-bold text-[#9c640c]'>
@@ -30,6 +44,7 @@ export default function HomePage() {
             <button className='btn btn-ghost'>Explore Recipes</button>
           </div>
         </div>
+        {/* Hero Image */}
         <div>
           <img
             className='object-cover rounded-3xl h-[600px] w-[600px] shadow-2xl'
@@ -57,6 +72,22 @@ export default function HomePage() {
             Our clients favourite recipes
           </h1>
           <Carousell />
+        </div>
+      </section>
+      <section>
+        <div>
+          <h2 className='mb-6 mt-20 text-3xl text-center font-bold text-[#9c640c]'>
+            Pick a category
+          </h2>
+          <h1 className='text-5xl pb-10 text-center font-bold text-amber-900'>
+            Choose what suits you
+          </h1>
+          <div>
+            <button className='btn btn-accent'>Breakfast</button>
+            <button className='btn btn-ghost'>Lunch</button>
+            <button className='btn btn-ghost'>Dinner</button>
+            <button className='btn btn-ghost'>Dessert</button>
+          </div>
         </div>
       </section>
     </>
