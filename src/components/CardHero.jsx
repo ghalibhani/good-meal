@@ -1,11 +1,11 @@
 import React from "react";
 
-function CardHero({ image, title, customStyle }) {
+function CardHero({ image, title, customStyle, customSyleImg }) {
   return (
-    <div className={`${customStyle}bg-base-100 w-48 p-4 rounded-xl shadow-2xl`}>
+    <div className={`${customStyle}bg-base-100  p-4 rounded-xl shadow-2xl`}>
       <figure>
         <img
-          className='object-cover rounded-lg w-48 h-48'
+          className={`${customSyleImg}object-cover rounded-lg `}
           src={image}
           alt={title}
         />
@@ -20,3 +20,4 @@ function CardHero({ image, title, customStyle }) {
 }
 
 export default CardHero;
+  

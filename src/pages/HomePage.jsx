@@ -10,6 +10,7 @@ import { fetchCategories } from "../redux/categoriesSlice";
 import { useSelector } from "react-redux";
 import { fetchMealsByCategory } from "../redux/mealsByCatSlice";
 import { useState } from "react";
+import Loading from "../components/Loading";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ export default function HomePage() {
     isLoading: state.mealsByCat.isLoading,
   }));
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedButton, setSelectedButton] = useState(null);
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -26,6 +28,7 @@ export default function HomePage() {
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
+    setSelectedButton(category);
   };
 
   useEffect(() => {
@@ -68,12 +71,14 @@ export default function HomePage() {
           />
           <CardHero
             image={cardImage1}
-            customStyle={"absolute  top-[550px] right-[630px] "}
+            customStyle={"absolute w-48 top-[550px] right-[630px] "}
+            customSyleImg={"w-48 h-48 "}
             title='Beef Burger'
           />
           <CardHero
             image={cardImage2}
-            customStyle={"absolute  top-[80px] right-[100px] "}
+            customStyle={"absolute w-48 top-[80px] right-[100px] "}
+            customSyleImg={"w-48 h-48 "}
             title='Garden Burger'
           />
         </div>
@@ -97,26 +102,30 @@ export default function HomePage() {
           <h1 className='text-5xl pb-10 text-center font-bold text-amber-900'>
             Choose what suits you
           </h1>
-          <div className='grid grid-cols-9 items-center mb-7 grid-rows-2 gap-3 w-[1100px] mx-auto'>
-            {categories?.map((category, index) => (
+          <div className='flex flex-wrap items-center justify-center mb-7 gap-3 w-[1100px] mx-auto'>
+            {categories?.map((category) => (
               <button
                 key={category.idCategory}
-                className={`btn btn-accent w-28 ${
-                  index > 8 ? `col-start-${(index % 9) + 3}` : ""
-                }`}
+                className={`btn ${
+                  selectedButton === category.strCategory
+                    ? "btn-accent"
+                    : "btn-outline btn-accent"
+                }  w-28 `}
                 onClick={() => handleCategoryClick(category.strCategory)}
               >
                 {category.strCategory}
               </button>
             ))}
           </div>
-          <div className='flex flex-wrap gap-6 px-32'>
+          <div className='flex flex-wrap justify-center gap-6 px-20'>
             {isLoading ? (
-              <p>Loading...</p>
+              <Loading />
             ) : (
               meals?.map((meal) => (
                 <CardHero
                   key={meal.idMeal}
+                  customStyle={"w-[300px] "}
+                  customSyleImg={"w-[300px] h-[230px] "}
                   image={meal.strMealThumb}
                   title={meal.strMeal}
                 />
