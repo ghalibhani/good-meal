@@ -3,7 +3,7 @@ import loading from "../assets/loading.gif";
 
 function Loading() {
   return (
-    <div>
+    <div className='flex items-center h-screen justify-center'>
       <img src={loading} alt='loading' />
     </div>
   );

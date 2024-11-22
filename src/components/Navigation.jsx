@@ -4,7 +4,9 @@ function Navigation() {
   return (
     <div className='navbar px-10 shadow bg-base-100 fixed z-10'>
       <div className='flex-1'>
-        <a className='btn btn-ghost text-3xl text-accent'>Good Meal</a>
+        <a href='/' className='btn btn-ghost text-3xl text-accent'>
+          Good Meal
+        </a>
       </div>
       <div className='flex-none gap-2'>
         <div className='form-control'>

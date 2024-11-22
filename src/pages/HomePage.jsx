@@ -11,9 +11,11 @@ import { useSelector } from "react-redux";
 import { fetchMealsByCategory } from "../redux/mealsByCatSlice";
 import { useState } from "react";
 import Loading from "../components/Loading";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { categories } = useSelector((state) => state.categories.categories);
   const { meals, isLoading } = useSelector((state) => ({
     meals: state.mealsByCat.meals.meals,
@@ -29,6 +31,10 @@ export default function HomePage() {
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
     setSelectedButton(category);
+  };
+
+  const handleClickDetails = (id) => {
+    navigate(`/details/${id}`);
   };
 
   useEffect(() => {
@@ -124,8 +130,9 @@ export default function HomePage() {
               meals?.map((meal) => (
                 <CardHero
                   key={meal.idMeal}
-                  customStyle={"w-[300px] "}
+                  customStyle={"w-[300px] hover:scale-110 transition-all "}
                   customSyleImg={"w-[300px] h-[230px] "}
+                  click={() => handleClickDetails(meal.idMeal)}
                   image={meal.strMealThumb}
                   title={meal.strMeal}
                 />

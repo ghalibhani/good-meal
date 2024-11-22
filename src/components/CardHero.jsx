@@ -1,8 +1,11 @@
 import React from "react";
 
-function CardHero({ image, title, customStyle, customSyleImg }) {
+function CardHero({ image, title, customStyle, customSyleImg, click }) {
   return (
-    <div className={`${customStyle}bg-base-100  p-4 rounded-xl shadow-2xl`}>
+    <div
+      onClick={click}
+      className={`${customStyle}bg-base-100  p-4 rounded-xl shadow-2xl`}
+    >
       <figure>
         <img
           className={`${customSyleImg}object-cover rounded-lg `}
@@ -20,4 +23,3 @@ function CardHero({ image, title, customStyle, customSyleImg }) {
 }
 
 export default CardHero;
-  
