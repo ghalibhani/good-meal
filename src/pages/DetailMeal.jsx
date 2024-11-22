@@ -27,10 +27,10 @@ function DetailMeal() {
 
   return (
     <section className='flex flex-col justify-center'>
-      <div className='flex px-64 w-full mb-44 pt-[200px] items-center justify-between'>
+      <div className='flex px-40 w-full mb-44 pt-[150px] items-center justify-between'>
         <div className=' w-1/2'>
           <img
-            className='object-cover rounded-3xl h-[600px] w-[650px] shadow-2xl'
+            className='object-cover rounded-3xl h-[700px] w-[850px] shadow-2xl'
             src={detailMeals?.strMealThumb}
             alt='Hero Image'
           />
@@ -50,7 +50,7 @@ function DetailMeal() {
           </div>
 
           {/* <p>{detailMeals.strYoutube}</p> */}
-          <div className='shadow-2xl p-5 bg-[#fdf5e8] rounded-3xl'>
+          <div className='shadow-2xl p-5 bg-[#fdf5e8] rounded-lg'>
             <h2 className='text-xl mb-2 font-semibold text-[#9c640c]'>
               Ingredient :
             </h2>
@@ -79,7 +79,7 @@ function DetailMeal() {
                 .map((item, index) => (
                   <p key={index} className=''>
                     {index + 1}. {item.ingredient || ""}{" "}
-                    {item.measure ? `= ${item.measure}` : ""}
+                    {item.measure ? ` ${item.measure}` : ""}
                   </p>
                 ))}
             </div>
@@ -89,9 +89,9 @@ function DetailMeal() {
       <h1 className='text-5xl mb-8 text-center font-bold text-amber-900'>
         How to make it
       </h1>
-      <div className='flex px-12 gap-8 justify-center'>
-        <div className='shadow-2xl w-1/2 p-5 bg-[#fdf5e8] rounded-3xl'>
-          <div className='p-4 leading-relaxed'>
+      <div className='flex px-12 gap-8 items-center justify-center'>
+        <div className=' w-1/2'>
+          <div className='p-4 rounded-lg shadow-2xl bg-[#fdf5e8] leading-relaxed'>
             <h2 className='text-xl mb-2 font-semibold text-[#9c640c]'>
               Instruction :
             </h2>
@@ -102,10 +102,7 @@ function DetailMeal() {
             ))}
           </div>
         </div>
-        <div className='aspect-video mt-10'>
-          <h2 className='text-2xl text-center font-bold text-amber-900'>
-            See the video
-          </h2>
+        <div className='aspect-video'>
           <ReactPlayer url={videoUrl} controls />
         </div>
       </div>
