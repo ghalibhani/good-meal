@@ -5,6 +5,9 @@ import App from "./App.jsx";
 import { createBrowserRouter } from "react-router-dom";
 import HomePage from "./pages/HomePage.jsx";
 import { RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "../store.js";
+import DetailMeal from "./pages/DetailMeal.jsx";
 
 const router = createBrowserRouter([
   {
@@ -15,12 +18,18 @@ const router = createBrowserRouter([
         path: "/",
         element: <HomePage />,
       },
+      {
+        path: "/details/:id",
+        element: <DetailMeal />,
+      },
     ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>
 );
