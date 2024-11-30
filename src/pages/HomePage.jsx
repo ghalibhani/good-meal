@@ -64,7 +64,7 @@ export default function HomePage() {
             </p>
           </div>
           <div className='flex jus gap-6'>
-            <button className='btn btn-accent'>Get Started</button>
+            <button className='btn btn-accent'>Find Meals</button>
             <button className='btn btn-ghost'>Explore Recipes</button>
           </div>
         </div>
@@ -100,7 +100,7 @@ export default function HomePage() {
           <Carousell />
         </div>
       </section>
-      <section>
+      <section className="mb-20">
         <div>
           <h2 className='mb-6 mt-20 text-3xl text-center font-bold text-[#9c640c]'>
             Pick a category

@@ -26,7 +26,7 @@ function DetailMeal() {
   const videoUrl = detailMeals?.strYoutube;
 
   return (
-    <section className='flex flex-col justify-center'>
+    <section className='flex flex-col justify-center mb-14'>
       <div className='flex px-40 w-full mb-44 pt-[150px] items-center justify-between'>
         <div className=' w-1/2'>
           <img
