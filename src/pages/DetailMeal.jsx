@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { fetchDetailsMeal } from "../redux/detailsMealSlice";
 import { useSelector } from "react-redux";
 import Loading from "../components/Loading";
+import ReactPlayer from "react-player";
 
 function DetailMeal() {
   const { id } = useParams();
@@ -22,27 +23,34 @@ function DetailMeal() {
   if (isLoading) return <Loading />;
 
   const instructions = detailMeals?.strInstructions;
+  const videoUrl = detailMeals?.strYoutube;
 
   return (
-    <section className='flex flex-col justify-center'>
-      <div className='flex px-64 w-full pt-[200px] items-center justify-between'>
+    <section className='flex flex-col justify-center mb-14'>
+      <div className='flex px-40 w-full mb-44 pt-[150px] items-center justify-between'>
         <div className=' w-1/2'>
           <img
-            className='object-cover rounded-3xl h-[600px] w-[650px] shadow-2xl'
+            className='object-cover rounded-3xl h-[700px] w-[850px] shadow-2xl'
             src={detailMeals?.strMealThumb}
             alt='Hero Image'
           />
         </div>
         <div className=' w-1/2 px-7'>
-          <h1 className='text-5xl mb-4 text-center font-bold text-amber-900'>
+          <h1 className='text-5xl mb-5 text-center font-bold text-amber-900'>
             {detailMeals?.strMeal}
           </h1>
-          <div className='mb-4 flex gap-3'>
-            <p className='border-2 border-[#9c640c] text-amber-950 py-1 px-4 w-fit rounded-2xl'>
-              {detailMeals?.strTags || "Healty Food"}
+          <div className='border-t-2 border-[#9c640c]'>
+            <p className=' text-amber-950 mt-3 text-lg'>
+              Cuisine :{" "}
+              <span className='font-medium'>{detailMeals?.strArea}</span>
+            </p>
+            <p className='mb-4 text-lg text-amber-950'>
+              Tags : {detailMeals?.strTags || "Healty Food"}
             </p>
           </div>
-          <div className='shadow-2xl p-5 bg-[#fdf5e8] rounded-3xl'>
+
+          {/* <p>{detailMeals.strYoutube}</p> */}
+          <div className='shadow-2xl p-5 bg-[#fdf5e8] rounded-lg'>
             <h2 className='text-xl mb-2 font-semibold text-[#9c640c]'>
               Ingredient :
             </h2>
@@ -71,23 +79,31 @@ function DetailMeal() {
                 .map((item, index) => (
                   <p key={index} className=''>
                     {index + 1}. {item.ingredient || ""}{" "}
-                    {item.measure ? `= ${item.measure}` : ""}
+                    {item.measure ? ` ${item.measure}` : ""}
                   </p>
                 ))}
             </div>
           </div>
         </div>
       </div>
-      <div className='mt-36 px-64'>
-        <h1 className='text-5xl mb-4 text-center font-bold text-amber-900'>
-          How to make it
-        </h1>
-        <div className='p-4 leading-relaxed'>
-          {instructions?.split("\r\n").map((step, index) => (
-            <p key={index} className='mb-4'>
-              {step}
-            </p>
-          ))}
+      <h1 className='text-5xl mb-8 text-center font-bold text-amber-900'>
+        How to make it
+      </h1>
+      <div className='flex px-12 gap-8 items-center justify-center'>
+        <div className=' w-1/2'>
+          <div className='p-4 rounded-lg shadow-2xl bg-[#fdf5e8] leading-relaxed'>
+            <h2 className='text-xl mb-2 font-semibold text-[#9c640c]'>
+              Instruction :
+            </h2>
+            {instructions?.split("\r\n").map((step, index) => (
+              <p key={index} className='mb-4'>
+                {step}
+              </p>
+            ))}
+          </div>
+        </div>
+        <div className='aspect-video'>
+          <ReactPlayer url={videoUrl} controls />
         </div>
       </div>
     </section>
